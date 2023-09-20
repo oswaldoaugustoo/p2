@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" href="men.css"><title>Requisitos da TV Box</title>
+</head>
+<body>
+<div class="container">
+<p href="">para garantir o funcionamento integro da TV Box agradeceremos caso conseguisse responder o formulário abaixo</p>
+<form id="networkConfigForm">
+<label for="routerLocation">Posição do Roteador:</label>
+<select id="routerLocation" name="routerLocation">
+<option value="escritorio">Escritório</option>
+<option value="local-aberto">Local Aberto</option>
+<option value="ao-lado-da-tv">Ao Lado da TV</option>
+</select><br>
+<label for="tvBoxModel">Modelo da TV Box:</label>
+<input type="text" id="tvBoxModel" name="tvBoxModel"><br>
+<label for="distanceRouterTvBox">Distância entre Roteador e TV Box (metros):</label>
+<input type="number" id="distanceRouterTvBox" name="distanceRouterTvBox"><br>
+<label for="distanceTvTvBox">Distância entre TV e TV Box (metros):</label>
+<input type="number" id="distanceTvTvBox" name="distanceTvTvBox"><br>
+<label>Qualidade da Internet do Roteador:</label>
+<input type="radio" id="goodQuality" name="internetQuality" value="4G">
+<label for="goodQuality">4G</label>
+<input type="radio" id="averageQuality" name="internetQuality" value="3G">
+<label for="averageQuality">3G</label>
+<input type="radio" id="poorQuality" name="internetQuality" value="2G">
+<label for="poorQuality">2G</label><br>
+<label for="wallMaterial">Material entre os Dispositivos:</label>
+<select id="wallMaterial" name="wallMaterial">
+<option value="metal">Metal</option>
+<option value="cobre">Cobre</option>
+<option value="chumbo">Chumbo</option>
+<option value="nenhum">Nenhum</option>
+</select><br>
+<label for="magnetProximity">Imãs Próximos?</label>
+<input type="checkbox" id="magnetProximity" name="magnetProximity"><br>
+ <button type="button" id="submitButton">Estimar</button>
+</form>
+<div id="resultMessage"></div>
+</div>
+<script>
+document.getElementById("submitButton").addEventListener("click", function(){     
+const routerLocation = document.getElementById("routerLocation").value;
+const tvBoxModel = document.getElementById("tvBoxModel").value;
+const distanceRouterTvBox = document.getElementById("distanceRouterTvBox").value;
+const distanceTvTvBox = document.getElementById("distanceTvTvBox").value;
+const internetQuality = document.querySelector('input[name="internetQuality"]:checked').value;
+const wallMaterial = document.getElementById("wallMaterial").value;
+const magnetProximity = document.getElementById("magnetProximity").checked;
+const resultMessage = `Configuração completa:<br>
+Roteador posicionado na ${routerLocation}.<br>
+TV Box modelo: ${tvBoxModel}.<br>
+ Distância entre Roteador e TV Box: ${distanceRouterTvBox} metros.<br>
+ Distância entre TV e TV Box: ${distanceTvTvBox} metros.<br>
+Qualidade da Internet: ${internetQuality}.<br>
+Material entre as paredes: ${wallMaterial}.<br>
+Imãs próximos: ${magnetProximity ? "Sim" : "Não"}.`;
+document.getElementById("resultMessage").innerHTML = resultMessage;});
+</script>
+</body>
+</html>

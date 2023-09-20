@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html><link rel="stylesheet" href="men.css">
+<head>
+    <title>Calculadora de Débitos Judiciais</title>
+    <style>
+        /* Seu CSS aqui */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Débitos Judiciais</h1>
+        
+        <label for="causa">Selecione a Causa:</label>
+        <select id="causa">
+            <option value="0">Selecione uma causa</option>
+            <option value="1" data-taxa="0.05">Causa 1 - Taxa: 5%</option>
+            <option value="2" data-taxa="0.1">Causa 2 - Taxa: 10%</option>
+            <option value="3" data-taxa="0.15">Causa 3 - Taxa: 15%</option>
+        </select>
+
+        <label for="valorPrincipal">Valor Principal (R$):</label>
+        <input type="text" id="valorPrincipal" placeholder="0.00">
+
+        <label for="juros">Juros (%):</label>
+        <input type="text" id="juros" placeholder="0.00">
+
+        <label for="prazo">Prazo (em meses):</label>
+        <input type="text" id="prazo" placeholder="0">
+
+        <button onclick="calcularDebito()">Calcular</button>
+        
+        <h2>Total do Débito Judicial: <span id="totalDebito">0.00</span> R$</h2>
+    </div>
+
+    <script>
+        function calcularDebito() {
+            const valorPrincipal = parseFloat(document.getElementById('valorPrincipal').value);
+            const juros = parseFloat(document.getElementById('juros').value);
+            const prazo = parseFloat(document.getElementById('prazo').value);
+            const causaSelect = document.getElementById('causa');
+            const causaSelecionada = causaSelect.options[causaSelect.selectedIndex];
+            const taxa = parseFloat(causaSelecionada.getAttribute('data-taxa'));
+
+            if (!isNaN(valorPrincipal) && !isNaN(juros) && !isNaN(prazo) && !isNaN(taxa)) {
+                const jurosCalculados = (valorPrincipal * (juros / 100)) * prazo;
+                const taxaCalculada = valorPrincipal * taxa;
+                const totalDebito = valorPrincipal + jurosCalculados + taxaCalculada;
+                document.getElementById('totalDebito').textContent = totalDebito.toFixed(2) + ' R$';
+            } else {
+                alert('Por favor, preencha todos os campos corretamente.');
+            }
+        }
+    </script>
+</body>
+</html>
